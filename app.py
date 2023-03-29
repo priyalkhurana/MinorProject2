@@ -9,7 +9,7 @@ import time
 
 
 
-pinecone_api_key = st.secrets["ee0b5c4a-2c31-4ef7-b0b2-4ee30909e634"]
+pinecone_api_key = st.secrets["pinecone_api_key"]
 pinecone.init(
     api_key=pinecone_api_key, 
               environment='us-west1-gcp')
