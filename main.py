@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 import openai
-from streamlit_chat import message
+#from streamlit_chat import message
 from PIL import Image
 import time
 import toml
@@ -53,14 +53,20 @@ def generate_chat_response(prompt):
     )
     message = response.choices[0].text.strip()
     return message
+def generate_response_chatgpt(question):
+    response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+            {"role": "user", "content": generate_prompt(question)}
+        ]
+        )
+    return response['choices'][0]['message']['content']
 
 def message(response):
     if response and response.choices and response.choices[0].text:
         return response.choices[0].text.strip()
     else:
         return "Sorry, I couldn't understand you. Can you please try again?"
-
-
 def get_text():
     input_text = st.text_input("*How are you feeling? Ask a question or describe your situation below, and then press Enter.*",placeholder="Type Your question here.", key=txtInputQuestion)
     return input_text
@@ -109,8 +115,12 @@ if __name__ == '__main__':
     print("get_text called.")
     if user_input:
         output = generate_chat_response(user_input)
+        output = generate_response_chatgpt(user_input)
+        output = generate_response_davinci(user_input)
         st.write("Bhagvad Gita says: ", message)
         # store the output
         st.session_state.past.append(user_input)
         st.session_state.generated.append(output)
+
+   
 
