@@ -4,11 +4,21 @@ import openai
 from streamlit_chat import message
 from PIL import Image
 import time
+import toml
+
+secrets = toml.load('secrets.toml')
+#api_key = secrets['openai.api_key']['pinecone_api_key']
+with open('secrets.toml', 'r') as f:
+    secrets = toml.load(f)
+
+# Get the OpenAI and Pinecone API keys from the secrets dictionary
+openai_api_key = secrets['openai']['openai_api_key']
 
 txtInputQuestion = "userQuestion"
 pageTitle = "Bhagvad Gita GPT"
 
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+openai.api_key = openai_api_key
+
 
 def clear_text(textInput):
 
@@ -92,8 +102,8 @@ if __name__ == '__main__':
         st.session_state.past.append(user_input)
         st.session_state.generated.append(output)
 
-    if st.session_state['generated']:
+    #if st.session_state['generated']:
 
-        for i in range(len(st.session_state['generated']) - 1, -1, -1):
-            message(st.session_state["generated"][i], key=str(i),seed=10,avatar_style='avataaars')
-            message(st.session_state['past'][i], is_user=True, key=str(i) + '_user',seed=200,avatar_style='avataaars')
+     #   for i in range(len(st.session_state['generated']) - 1, -1, -1):
+      #      message(st.session_state["generated"][i], key=str(i),seed=10,avatar_style='avataaars')
+      #      message(st.session_state['past'][i], is_user=True, key=str(i) + '_user',seed=200,avatar_style='avataaars')
