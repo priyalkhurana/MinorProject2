@@ -26,14 +26,6 @@ def clear_text(textInput):
 
     st.session_state[textInput] = ""
 
-def generate_prompt(question):
-    return """{} 
-    Question:{} 
-    Answer:""".format(st.secrets["SYSTEM_PROMPT"],
-        question
-    )
-
-
 
 def generate_response_davinci(question):
     response = openai.Completion.create(
@@ -45,11 +37,27 @@ def generate_response_davinci(question):
     return response.choices[0].text
 
 
+def generate_prompt(question):
+    prompt = f"I am here to help you. What is your question or problem? {question}"
+    return prompt
+
+def generate_chat_response(prompt):
+    response = openai.Completion.create(
+        engine="davinci",
+        prompt=prompt,
+        max_tokens=1024,
+        temperature=0.7,
+        n=1,
+        stop=None,
+        timeout=20,
+    )
+    message = response.choices[0].text.strip()
+    return message
+
 
 def get_text():
     input_text = st.text_input("*How are you feeling? Ask a question or describe your situation below, and then press Enter.*",placeholder="Type Your question here.", key=txtInputQuestion)
     return input_text
-
 
 def page_setup(title, icon):
     st.set_page_config(
@@ -85,7 +93,7 @@ if __name__ == '__main__':
 
     col1, col2 = st.columns(2)
     with col1:
-        st.title("Bhagvad Gita GPT")
+        st.title("HOLY-GPT")
     with col2:
         st.image(icon)
     #st.write("test 1")
@@ -94,7 +102,8 @@ if __name__ == '__main__':
 
     print("get_text called.")
     if user_input:
-        output = generate_response_davinci(user_input)
+        output = generate_chat_response(user_input)
+        st.write("Bhagvad Gita says: ", message)
         # store the output
         st.session_state.past.append(user_input)
         st.session_state.generated.append(output)
