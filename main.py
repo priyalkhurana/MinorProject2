@@ -54,6 +54,12 @@ def generate_chat_response(prompt):
     message = response.choices[0].text.strip()
     return message
 
+def message(response):
+    if response and response.choices and response.choices[0].text:
+        return response.choices[0].text.strip()
+    else:
+        return "Sorry, I couldn't understand you. Can you please try again?"
+
 
 def get_text():
     input_text = st.text_input("*How are you feeling? Ask a question or describe your situation below, and then press Enter.*",placeholder="Type Your question here.", key=txtInputQuestion)
