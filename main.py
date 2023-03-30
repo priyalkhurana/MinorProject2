@@ -22,47 +22,16 @@ openai.api_key = openai_api_key
 
 
 
-
-
-
-
-def generate_prompt(question):
-    prompt = f"I am here to help you. What is your question or problem? {question}"
-    return prompt
-
-def generate_chat_response(prompt):
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        max_tokens=1024,
-        temperature=0.7,
-        n=1,
-        stop=None,
-        timeout=20,
-    )
-    message = response.choices[0].text.strip()
-    return message
-
-# Get user input
-question = st.text_input("Ask a question or describe your situation below, and then press Enter.")
-
-# Generate chat response
-if question:
-    prompt = generate_prompt(question)
-    message = generate_chat_response(prompt)
-    st.write("Bhagvad Gita says: ", message)
-
-
 def clear_text(textInput):
 
     st.session_state[textInput] = ""
 
-#def generate_prompt(question):
-#   return """{} 
- #   Question:{} 
- #   Answer:""".format(st.secrets["SYSTEM_PROMPT"],
-  #      question
-   # )
+def generate_prompt(question):
+    return """{} 
+    Question:{} 
+    Answer:""".format(st.secrets["SYSTEM_PROMPT"],
+        question
+    )
 
 
 
@@ -99,9 +68,9 @@ def page_setup(title, icon):
         }
     )
     st.sidebar.title('Creators :')
-    st.sidebar.markdown('PRIYAL KHURANA')
-    st.sidebar.write("DIVYANSH KUMAR")
-    st.sidebar.write("MITALI CHAUDHARY")
+    st.sidebar.markdown('Priyal Khurana')
+    st.sidebar.write('Divyansh Kumar')
+    st.sidebar.write("Mitali Chaudhary")
 
 
 # Press the green button in the gutter to run the script.
@@ -131,14 +100,13 @@ if __name__ == '__main__':
 
     print("get_text called.")
     if user_input:
-        output = generate_response_davinci(user_input)
-
+        output = generate_response_chatgpt(user_input)
         # store the output
         st.session_state.past.append(user_input)
         st.session_state.generated.append(output)
 
-    #if st.session_state['generated']:
+   # if st.session_state['generated']:
 
-     #   for i in range(len(st.session_state['generated']) - 1, -1, -1):
-      #      message(st.session_state["generated"][i], key=str(i),seed=10,avatar_style='avataaars')
-      #      message(st.session_state['past'][i], is_user=True, key=str(i) + '_user',seed=200,avatar_style='avataaars')
+    #    for i in range(len(st.session_state['generated']) - 1, -1, -1):
+     ##      message(st.session_state['past'][i], is_user=True, key=str(i) + '_user',seed=200,avatar_style='avataaars')
+
