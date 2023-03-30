@@ -47,17 +47,9 @@ def generate_response_davinci(question):
 
 
 def get_text():
-    input_text = st.text_input("Hello, ask me a question about life and philosophy.",placeholder="Type Your question here.", key=txtInputQuestion)
+    input_text = st.text_input("*How are you feeling? Ask a question or describe your situation below, and then press Enter.*",placeholder="Type Your question here.", key=txtInputQuestion)
     return input_text
-st.write('''\n\n Here's some examples of what you can ask:
-1. I've worked very hard but I'm still not able to achieve the results I hoped for, what do I do?
-2. I made a million dollars manipulating the stock market and I'm feeling great.
-3. How can I attain a peace of mind?
-''')
 
-st.write('\n\n\n\n\n\n\n')
-
-st.write('''Note: This is an AI model trained on Bhagvad Gita and it generates responses from that perspective.''')
 
 def page_setup(title, icon):
     st.set_page_config(
