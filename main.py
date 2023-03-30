@@ -15,7 +15,7 @@ with open('secrets.toml', 'r') as f:
 openai_api_key = secrets['openai']['openai_api_key']
 
 txtInputQuestion = "userQuestion"
-pageTitle = "Bhagvad Gita GPT"
+pageTitle = "HOLY-GPT"
 
 openai.api_key = openai_api_key
 
@@ -44,18 +44,20 @@ def generate_response_davinci(question):
     )
     return response.choices[0].text
 
-def generate_response_chatgpt(question):
-    response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-            {"role": "user", "content": generate_prompt(question)}
-        ]
-        )
-    return response['choices'][0]['message']['content']
+
 
 def get_text():
     input_text = st.text_input("Hello, ask me a question about life and philosophy.",placeholder="Type Your question here.", key=txtInputQuestion)
     return input_text
+st.write('''\n\n Here's some examples of what you can ask:
+1. I've worked very hard but I'm still not able to achieve the results I hoped for, what do I do?
+2. I made a million dollars manipulating the stock market and I'm feeling great.
+3. How can I attain a peace of mind?
+''')
+
+st.write('\n\n\n\n\n\n\n')
+
+st.write('''Note: This is an AI model trained on Bhagvad Gita and it generates responses from that perspective.''')
 
 def page_setup(title, icon):
     st.set_page_config(
@@ -68,9 +70,9 @@ def page_setup(title, icon):
         }
     )
     st.sidebar.title('Creators :')
-    st.sidebar.markdown('Priyal Khurana')
-    st.sidebar.write('Divyansh Kumar')
-    st.sidebar.write("Mitali Chaudhary")
+    st.sidebar.markdown('Priyal Khurana (https://github.com/priyalkhurana)')
+    st.sidebar.write('Divyansh Kumar(https://github.com/divyanshkr01)')
+    st.sidebar.write("Mitali Chaudhary(https://github.com/Mitali0502)")
 
 
 # Press the green button in the gutter to run the script.
@@ -100,13 +102,8 @@ if __name__ == '__main__':
 
     print("get_text called.")
     if user_input:
-        output = generate_response_chatgpt(user_input)
+        output = generate_response_davinci(user_input)
         # store the output
         st.session_state.past.append(user_input)
         st.session_state.generated.append(output)
-
-   # if st.session_state['generated']:
-
-    #    for i in range(len(st.session_state['generated']) - 1, -1, -1):
-     ##      message(st.session_state['past'][i], is_user=True, key=str(i) + '_user',seed=200,avatar_style='avataaars')
 
