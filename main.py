@@ -99,8 +99,9 @@ def page_setup(title, icon):
         }
     )
     st.sidebar.title('Creators :')
-    st.sidebar.markdown('Abhishek Mishra (https://github.com/abhishek-mishra-07)')
-    st.sidebar.write("Shubhi Tiwari (https://github.com/tiwariShubhi)")
+    st.sidebar.markdown('PRIYAL KHURANA')
+    st.sidebar.write("DIVYANSH KUMAR")
+    st.sidebar.write("MITALI CHAUDHARY")
 
 
 # Press the green button in the gutter to run the script.
